@@ -4,6 +4,23 @@ var Readable = require("stream").Readable
 function SockJSRepl(options)
 {
   Readable.call(this, options);
+  
+  if (!"prompt" in options)
+  {
+    this.prompt = "> ";
+  }
+  
+  
+  if (!"port" in options)
+  {
+    this.port = 9000;
+  }
+  
+  if (!"prefix" in options)
+  {
+    this.prefix = "/repl";
+  }
+  
   this.sockjs_server = require('sockjs').createServer();
   
   var self = this;
@@ -21,7 +38,7 @@ function SockJSRepl(options)
     
     // repl
     require('repl').start({
-      prompt: '> ',
+      prompt: this.prompt,
       input: self,
       output: conn
     }).on('exit', function() {
@@ -31,8 +48,8 @@ function SockJSRepl(options)
   });
     
   this.http_server = require('http').createServer();
-  this.sockjs_server.installHandlers(this.http_server, {prefix:'/repl'}); // TODO replace defaults with options
-  this.http_server.listen(9000, '0.0.0.0'); // TODO replace defaults with options
+  this.sockjs_server.installHandlers(this.http_server, {prefix:this.prefix});
+  this.http_server.listen(this.port, '0.0.0.0');
 }
 
 require("util").inherits(SockJSRepl, Readable);
