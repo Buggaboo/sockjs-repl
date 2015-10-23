@@ -10,7 +10,6 @@ function SockJSRepl(options)
     this.prompt = "> ";
   }
   
-  
   if (!"port" in options)
   {
     this.port = 9000;
