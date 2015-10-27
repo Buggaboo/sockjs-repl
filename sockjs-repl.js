@@ -4,18 +4,12 @@ var Readable = require("stream").Readable
 function SockJSRepl(options)
 {
   Readable.call(this, options);
-  
-  var opts = options;
-  if (options === undefined)
-  {
-    opts = {
+
+  var opts = options || {
         prompt : "> "
         , port : 9000
         , prefix : "repl"
-    };
-  }else {
-    opts = options;
-  }
+  };
   
   this.prefix = opts.prefix;
   this.port = opts.port;
