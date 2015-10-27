@@ -15,6 +15,6 @@ sock.onclose = function() {
 }
 
 sock.onmessage = function(e) {
-    console.log('message', e.data);
+    console.log('', e.data);
     // TODO if 1338 then close
 }

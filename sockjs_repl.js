@@ -5,20 +5,9 @@ function SockJSRepl(options)
 {
   Readable.call(this, options);
   
-  if (!"prompt" in options)
-  {
-    this.prompt = "> ";
-  }
-  
-  if (!"port" in options)
-  {
-    this.port = 9000;
-  }
-  
-  if (!"prefix" in options)
-  {
-    this.prefix = "/repl";
-  }
+  this.prompt = options.prompt || "> ";
+  this.port = parseInt(options.port) || 9000;
+  this.prefix = options.prefix || "/repl";
   
   this.sockjs_server = require('sockjs').createServer();
   
