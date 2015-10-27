@@ -8,7 +8,7 @@ function SockJSRepl(options)
   var opts = options || {
         prompt : "> "
         , port : 9000
-        , prefix : "repl"
+        , prefix : "/repl" // don't forget the slash in front
   };
   
   this.prefix = opts.prefix;
@@ -54,8 +54,7 @@ SockJSRepl.prototype._read = function noop(size) {
 module.exports = SockJSRepl;
 
 // usage:
-// new require('sockjs_repl')(opts);
-
-new SockJSRepl;
+// var SockJSRepl = require('./sockjs-repl');
+// new SockJSRepl;
 
 
