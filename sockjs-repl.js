@@ -5,10 +5,22 @@ function SockJSRepl(options)
 {
   Readable.call(this, options);
   
-  this.prompt = options.prompt || "> ";
-  this.port = parseInt(options.port) || 9000;
-  this.prefix = options.prefix || "/repl";
+  var opts = options;
+  if (options === undefined)
+  {
+    opts = {
+        prompt : "> "
+        , port : 9000
+        , prefix : "repl"
+    };
+  }else {
+    opts = options;
+  }
   
+  this.prefix = opts.prefix;
+  this.port = opts.port;
+  this.prompt = opts.prompt;
+    
   this.sockjs_server = require('sockjs').createServer();
   
   var self = this;
@@ -50,6 +62,6 @@ module.exports = SockJSRepl;
 // usage:
 // new require('sockjs_repl')(opts);
 
-
+new SockJSRepl;
 
 
